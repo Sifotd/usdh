@@ -1,54 +1,56 @@
-# React + TypeScript + Vite
+# Time Capsule
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A blockchain-based time capsule project that allows users to create, share, and interact with digital memories.
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Time Capsule is an innovative Web3 application built on the Sui blockchain, enabling users to mint their precious memories (text and images) as NFTs and optionally share them in a public pool. This project is not just a digital collectibles platform but a social space connecting the past and future.
 
-## Expanding the ESLint configuration
+## Core Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Capsule Creation
+- Upload images and add text content
+- Mint content as unique NFTs
+- Customize capsule unlock time
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 2. Capsule Pool
+- Showcase capsules in the public pool
+- Browse capsules shared by other users
+- Like and interact with favorite capsules
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3. Social Interaction
+- View capsule creator information
+- Interact with other users
+- Collect favorite capsules
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Technical Architecture
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- Frontend: React.js + Next.js
+- Smart Contracts: Move
+- Blockchain: Sui
+- Storage: IPFS
+- Deployment: Vercel
+
+## User Flow
+
+1. Connect Wallet
+2. Create Capsule (Upload Image/Add Text)
+3. Choose to add to public pool
+4. Browse other users' capsules
+5. Engage in interactions (likes, comments)
+
+## Project Highlights
+
+- Decentralized storage ensures permanent content preservation
+- Transparent interaction mechanism
+- User-friendly interface
+- Secure smart contract system
+- Built on Sui's high-performance blockchain
+
+## Development Team
+
+[To be added]
+
+## License
+
+MIT License

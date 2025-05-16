@@ -1,13 +1,213 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USDH Stablecoin</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .flex-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0;
+    }
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: white;
+    }
+    .btn-blue {
+      background-color: #3182ce;
+    }
+    .btn-green {
+      background-color: #38a169;
+    }
+    .btn-purple {
+      background-color: #805ad5;
+    }
+    .btn-primary {
+      background-color: #4c68ef;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .card {
+      padding: 1.5rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+    .card-label {
+      font-size: 0.875rem;
+      color: #718096;
+      margin-bottom: 0.5rem;
+    }
+    .card-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0;
+    }
+    .section {
+      padding: 2rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .input-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .input {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.375rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="flex-column">
+      <!-- Header -->
+      <div class="header">
+        <h1 class="title">USDH Stablecoin</h1>
+        <button class="btn btn-primary" onclick="alert('钱包连接功能尚未实现')">连接钱包</button>
+      </div>
+
+      <!-- 用户数据 -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-label">我的 USDH 余额</div>
+          <div class="card-value">5000 USDH</div>
+        </div>
+        <div class="card">
+          <div class="card-label">我的算力</div>
+          <div class="card-value">5000 TH/s</div>
+        </div>
+      </div>
+
+      <!-- 铸造 USDH -->
+      <div class="section">
+        <h2 class="section-title">铸造 USDH</h2>
+        <p>质押算力来铸造 USDH</p>
+        <div class="input-group">
+          <input type="number" id="mintAmount" min="0" placeholder="输入要铸造的 USDH 数量" class="input">
+          <button class="btn btn-blue" onclick="handleMint()">铸造</button>
+        </div>
+      </div>
+
+      <!-- 赎回 USDH -->
+      <div class="section">
+        <h2 class="section-title">赎回 USDH</h2>
+        <p>赎回 USDH 获取算力</p>
+        <div class="input-group">
+          <input type="number" id="redeemAmount" min="0" placeholder="输入要赎回的 USDH 数量" class="input">
+          <button class="btn btn-green" onclick="handleRedeem()">赎回</button>
+        </div>
+      </div>
+
+      <!-- 质押算力 -->
+      <div class="section">
+        <h2 class="section-title">质押算力</h2>
+        <p>直接质押算力到系统</p>
+        <div class="input-group">
+          <input type="number" id="hashrate" min="0" placeholder="输入要质押的算力 (TH/s)" class="input">
+          <button class="btn btn-purple" onclick="handleStakeHashrate()">质押</button>
+        </div>
+      </div>
+
+      <!-- 市场数据 -->
+      <div class="section">
+        <h2 class="section-title">市场数据</h2>
+        <div class="grid-3">
+          <div>
+            <div class="card-label">USDH 价格</div>
+            <div class="card-value">$1.00</div>
+          </div>
+          <div>
+            <div class="card-label">总供应量</div>
+            <div class="card-value">1,000,000 USDH</div>
+          </div>
+          <div>
+            <div class="card-label">算力池总量</div>
+            <div class="card-value">100,000 TH/s</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function handleMint() {
+      const mintAmount = document.getElementById('mintAmount').value;
+      if (!mintAmount) {
+        alert('请输入数量');
+        return;
+      }
+      alert(`成功铸造 ${mintAmount} USDH`);
+      document.getElementById('mintAmount').value = '';
+    }
+
+    function handleRedeem() {
+      const redeemAmount = document.getElementById('redeemAmount').value;
+      if (!redeemAmount) {
+        alert('请输入数量');
+        return;
+      }
+      alert(`成功赎回 ${redeemAmount} USDH`);
+      document.getElementById('redeemAmount').value = '';
+    }
+
+    function handleStakeHashrate() {
+      const hashrate = document.getElementById('hashrate').value;
+      if (!hashrate) {
+        alert('请输入算力');
+        return;
+      }
+      alert(`成功质押 ${hashrate} TH/s 算力`);
+      document.getElementById('hashrate').value = '';
+    }
+  </script>
+</body>
 </html>

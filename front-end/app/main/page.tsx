@@ -1,9 +1,9 @@
 "use client";
+import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import DigitalRain from '@/components/DigitalRain';
 import FeaturesShowcase from '@/components/FeaturesShowcase';
-import Image from 'next/image';
 
 // Section components
 const HeroSection = () => {
